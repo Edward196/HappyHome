@@ -1,0 +1,144 @@
+@{
+    ViewBag.Title = "Contact";
+}
+<link href="~/css/Home/Contact.css" rel="stylesheet" />
+
+<main class="contact-page">
+
+    <!-- HERO -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Liên hệ</h1>
+            <p>Bạn cần tư vấn dịch vụ, báo giá nhanh hoặc đặt lịch? </p>
+            <p>HAPPY HOME luôn sẵn sàng hỗ trợ bạn.</p>
+            <div class="contact-hero-cta">
+                <a href="tel:0983538368" class="btn">Gọi ngay</a>
+                <a href="https://zalo.me/0983538368" target="_blank" rel="noopener" class="btn ghost">
+                    Chat Zalo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="contact-section">
+        <div class="container contact-grid">
+
+            <!-- INFO -->
+            <aside class="contact-card contact-info">
+                <h2>Thông tin liên hệ</h2>
+
+                <div class="contact-item">
+                    <span class="icon">☎</span>
+                    <div>
+                        <strong>Hotline</strong>
+                        <p><a href="tel:0983538368">0983 538 368</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="icon no-bg">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="">
+                    </span>
+                    <div>
+                        <strong>Zalo</strong>
+                        <p>
+                            <a href="https://zalo.me/0983538368" target="_blank" rel="noopener">
+                                zalo.me/0983538368
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <div>
+                        <strong>Địa chỉ</strong>
+                        <p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hateco+Hoàng+Mai+Hà+Nội"
+                                target="_blank" rel="noopener">
+                                Hateco, Hoàng Mai, Hà Nội
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="icon">⏰</span>
+                    <div>
+                        <strong>Giờ làm việc</strong>
+                        <p>08:00 – 20:00 (T2 – CN)</p>
+                    </div>
+                </div>
+
+                <!-- SOCIAL ICONS -->
+                <div class="social-row" aria-label="Mạng xã hội">
+                    <a class="social-icon" href="https://facebook.com/yourpage" target="_blank" rel="noopener">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg"
+                            alt="Facebook" loading="lazy">
+                    </a>
+
+                    <a class="social-icon" href="https://m.me/yourpage" target="_blank" rel="noopener">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg"
+                            alt="Messenger" loading="lazy">
+                    </a>
+
+                    <a class="social-icon" href="https://instagram.com/yourpage" target="_blank" rel="noopener">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                            alt="Instagram" loading="lazy">
+                    </a>
+
+                    <a class="social-icon" href="https://tiktok.com/%40yourpage" target="_blank" rel="noopener">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Tiktok_icon.svg" alt="TikTok"
+                            loading="lazy">
+                    </a>
+                </div>
+
+                <p class="note">
+                    * Bạn có thể gọi hoặc chat để nhận báo giá nhanh trong ngày.
+                </p>
+            </aside>
+
+            <!-- FORM -->
+            <section class="contact-card contact-form">
+                <h2>Gửi yêu cầu</h2>
+
+                <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm.'); this.reset();">
+                    <div class="row">
+                        <div class="field">
+                            <label>Họ và tên</label>
+                            <input required placeholder="Nguyễn Văn A">
+                        </div>
+                        <div class="field">
+                            <label>Số điện thoại</label>
+                            <input type="tel" required placeholder="09xx xxx xxx">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Dịch vụ quan tâm</label>
+                        <select>
+                            <option>Vệ sinh nhà ở</option>
+                            <option>Giúp việc theo giờ</option>
+                            <option>Vệ sinh định kỳ</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Khu vực</label>
+                        <input placeholder="VD: Hoàng Mai, Hà Nội">
+                    </div>
+
+                    <div class="field">
+                        <label>Nội dung yêu cầu</label>
+                        <textarea placeholder="Mô tả sơ bộ nhu cầu..."></textarea>
+                    </div>
+
+                    <button class="btn">Gửi liên hệ</button>
+                    <p class="form-note">* Chúng tôi sẽ gọi lại trong giờ làm việc.</p>
+                </form>
+            </section>
+
+        </div>
+    </section>
+</main>

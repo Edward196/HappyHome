@@ -1,0 +1,415 @@
+:root {
+  /* Green pastel palette */
+  --green-900: #006837;
+  /* headings*/
+  --green-700: #2f6f55;
+  /* primary text */
+  --green-600: #3fa57a;
+  /* primary brand */
+  --green-500: #2fb174;
+  /* buttons */
+  --green-550: #23965f;
+  /* buttons */
+  --green-400: #9fe2c5;
+  /* accents */
+  --green-100: #e3ffee;
+  /* backgrounds */
+  --mint-100: #e6fbf2;
+  /* subtle accent */
+  --gray-600: #455468;
+  --gray-400: #6c7a8a;
+  --ink: #0f172a;
+  --muted: #546a7b;
+  /* Background & UI */
+  --bg: #f7fcf9;
+  --card: #ffffff;
+  --ring: rgba(63, 165, 122, .25);
+  --shadow: 0 10px 30px rgba(31, 77, 58, .08);
+  --radius: 16px;
+  --max: 1200px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--bg) 0%, #ffffff 100%)
+}
+
+a {
+  color: var(--green-600);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--green-900);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring);
+  border-radius: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto
+}
+
+.container {
+  width: min(var(--max), 92%);
+  margin-inline: auto;
+}
+
+.shadow {
+  box-shadow: var(--shadow)
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .85rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 0;
+  background: var(--green-500);
+  color: #fff;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(.98);
+  background: var(--green-550);
+  color: #fff;
+}
+
+.btn.ghost {
+  background: #fff;
+  color: var(--green-700);
+  border: 1px solid #e5eef5
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: .85rem;
+  font-weight: 600
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+/* Reserve space for fixed header (current height = 74px) */
+.container.body-content {
+  padding-top: 74px;
+}
+
+/* Prevent anchor sections (#booking, #services...) from being hidden under header */
+html {
+  scroll-padding-top: 90px;
+  /* 74px + chút khoảng thở */
+}
+
+/* Optional: if you use :target anchors a lot */
+:target {
+  scroll-margin-top: 90px;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: .75rem 0;
+}
+
+.brand-link {
+  display: inline-flex;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.brand span {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--green-900);
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  background-image: url('../assets/home/logo60x60.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: .55rem .75rem;
+  border-radius: 12px;
+  color: var(--green-700);
+  font-weight: 700;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.site-nav a:hover {
+  background: var(--mint-100);
+  color: var(--green-900);
+}
+
+.nav-cta {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.hamburger {
+  display: none;
+}
+
+/* Footer */
+footer {
+  background: var(--green-900);
+  color: var(--mint-100);
+  margin-top: 3rem;
+}
+
+.foot {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 18px;
+  padding: 2.5rem 0;
+}
+
+footer a {
+  color: var(--mint-100);
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+footer ul {
+  margin: .75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .5rem;
+}
+
+.copyright {
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  padding: 1rem 0;
+  color: rgba(230, 251, 242, .78);
+  font-size: .95rem;
+  text-align: center;
+}
+
+/* Floating icon */
+.contact-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.contact-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, .06);
+  box-shadow: 0 10px 30px rgba(31, 77, 58, .18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.contact-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 15px 40px rgba(31, 77, 58, .28);
+}
+
+/* Icon size */
+.contact-btn img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Phone button (dùng brand color) */
+.contact-btn.phone {
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  padding-bottom: 8px;
+}
+
+/* phone hover */
+.contact-btn.phone:hover {
+  background: var(--green-550);
+}
+
+
+/* Responsive */
+@media (max-width:1000px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing {
+    grid-template-columns: 1fr
+  }
+
+  .coverage {
+    grid-template-columns: 1fr
+  }
+
+  .grid-3,
+  .blog,
+  .cards {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .contact {
+    grid-template-columns: 1fr
+  }
+}
+
+@media (max-width: 900px) {
+  .foot {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-btn {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 680px) {
+  .btn {
+    display: none;
+  }
+
+  /* nếu muốn giữ CTA, bỏ dòng này */
+
+  .hamburger {
+    display: inline-flex;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .10);
+    border-radius: 12px;
+    padding: .55rem;
+    gap: .35rem;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--green-900);
+    border-radius: 2px;
+  }
+
+  .site-nav ul {
+    display: none;
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: 72px;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    z-index: 2000;
+  }
+
+  .site-nav ul.is-open {
+    display: flex;
+    z-index: 2000;
+  }
+
+  .site-nav a {
+    width: 100%;
+  }
+
+  .grid-3,
+  .blog,
+  .cards {
+    grid-template-columns: 1fr
+  }
+}
+
+@media (max-width: 560px) {
+  .foot {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .contact-btn img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* safe-area for iOS */
+@supports (padding: max(0px)) {
+  .contact-float {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}

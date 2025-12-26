@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="HAPPY HOME cung cấp dịch vụ vệ sinh chuyên nghiệp: vệ sinh nhà ở, giúp việc theo giờ, vệ sinh định kỳ. Đặt lịch nhanh 60 giây, nhân viên thân thiện, giá minh bạch, có bảo hiểm trách nhiệm." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Giới thiệu HAPPY HOME – Dịch vụ vệ sinh chuyên nghiệp" />
+    <meta property="og:description"
+        content="Dịch vụ vệ sinh chuyên nghiệp – An toàn – Uy tín – Giá minh bạch. Phục vụ tại TP.HCM, Hà Nội, Đà Nẵng." />
+    <meta property="og:image" content="/images/og-about.jpg" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/home/Logo32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/home/Logo16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/home/Logo180x180.png">
+    <meta name="theme-color" content="#2fb174">
+
+    <!-- SEO Schema: LocalBusiness -->
+    @* <script type="application/ld+json" src="../"></script> *@
+
+    <title>@ViewBag.Title - HAPPY HOME</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="contact-float">
+        <!-- Zalo -->
+        <a href="https://zalo.me/0983538368" class="contact-btn zalo" target="_blank" rel="noopener"
+            aria-label="Chat Zalo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="">
+        </a>
+
+        <!-- Phone -->
+        <a href="tel:0983538368" class="contact-btn phone" aria-label="Gọi điện">
+            ☎
+        </a>
+
+        <!-- Messenger -->
+        <a href="https://m.me/thongtinchinhphu" class="contact-btn messenger" target="_blank" rel="noopener"
+            aria-label="Chat Messenger">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="">
+        </a>
+    </div>
+    <header class="site-header">
+        <div class="container nav">
+            <a href="/" class="brand-link" aria-label="Trang chủ HAPPY HOME">
+                <div class="brand">
+                    <div class="logo" aria-hidden="true"></div>
+                    <span>HAPPY HOME</span>
+                </div>
+            </a>
+
+            <nav class="site-nav" aria-label="Điều hướng chính">
+                <ul id="mainMenu">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li>@Html.ActionLink("Dịch vụ", "Service", "Home")</li>
+                    @* <li><a href="#blog">Blog</a></li> *@
+                    <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                </ul>
+            </nav>
+
+            <div class="nav-cta">
+                <a class="btn" href="#booking">Đặt dịch vụ ngay</a>
+                <button class="hamburger" type="button" aria-label="Mở menu" aria-controls="mainMenu"
+                    aria-expanded="false" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container foot">
+            <div>
+                <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem">
+                    <div class="logo" aria-hidden="true"></div>
+                    <strong>HAPPY HOME</strong>
+                </div>
+                <p>Dịch vụ vệ sinh cho gia đình – sạch tinh tế, an tâm mỗi ngày.</p>
+            </div>
+            <div>
+                <strong>Dịch vụ</strong>
+                <ul>
+                    <li><a href="#services">Vệ sinh nhà ở</a></li>
+                    <li><a href="#services">Giúp việc theo giờ</a></li>
+                    <li><a href="#services">Vệ sinh định kỳ</a></li>
+                </ul>
+            </div>
+            <div>
+                <strong>Về chúng tôi</strong>
+                <ul>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div>
+                <strong>Pháp lý</strong>
+                <ul>
+                    <li><a href="#">Điều khoản</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Chính sách hoàn tiền</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">© 2025 HAPPY HOME Co., Ltd.</div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

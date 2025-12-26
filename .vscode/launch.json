@@ -1,0 +1,151 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch PublicWeb",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildPublicWeb",
+            "program": "${workspaceFolder}/HappyHome.PublicWeb/bin/Debug/net8.0/HappyHome.PublicWeb.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.PublicWeb",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Launch ManagementWeb",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildManagementWeb",
+            "program": "${workspaceFolder}/HappyHome.ManagementWeb/bin/Debug/net8.0/HappyHome.ManagementWeb.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.ManagementWeb",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Launch Api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildApi",
+            "program": "${workspaceFolder}/HappyHome.Api/bin/Debug/net8.0/HappyHome.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Launch Domain",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildDomain",
+            "program": "${workspaceFolder}/HappyHome.Domain/bin/Debug/net8.0/HappyHome.Domain.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.Domain",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Launch Application",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildApplication",
+            "program": "${workspaceFolder}/HappyHome.Application/bin/Debug/net8.0/HappyHome.Application.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.Application",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Launch Infrastructure",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildInfrastructure",
+            "program": "${workspaceFolder}/HappyHome.Infrastructure/bin/Debug/net8.0/HappyHome.Infrastructure.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HappyHome.Infrastructure",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All Projects",
+            "configurations": [
+                "Launch PublicWeb",
+                "Launch ManagementWeb",
+                "Launch Api",
+                "Launch Domain",
+                "Launch Application",
+                "Launch Infrastructure"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Management Bundle",
+            "configurations": [
+                "Launch ManagementWeb",
+                "Launch Api",
+                "Launch Domain",
+                "Launch Application",
+                "Launch Infrastructure"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "API Bundle",
+            "configurations": [
+                "Launch Api",
+                "Launch Domain",
+                "Launch Application",
+                "Launch Infrastructure"
+            ],
+            "stopAll": true
+        },
+    ]
+}

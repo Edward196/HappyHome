@@ -1,0 +1,338 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<link href="~/css/Home/Index.css" rel="stylesheet" />
+
+<main class="home">
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="badge">Nhanh chóng • An toàn • Uy tín • Giá minh bạch</span>
+
+                <h1>Dịch vụ vệ sinh chuyên nghiệp cho ngôi nhà của bạn</h1>
+                <p>
+                    Đặt lịch dễ dàng chỉ trong 60 giây. Đội ngũ nhân viên thân thiện, đào tạo bài bản và sử dụng hoá
+                    chất
+                    an toàn gia đình.
+                </p>
+
+                <form class="booking" id="booking"
+                    onsubmit="event.preventDefault(); alert('Đã nhận yêu cầu! Chúng tôi sẽ liên hệ ngay.');">
+                    <label class="sr-only" for="addr">Địa chỉ</label>
+                    <input id="addr" name="addr" type="text" placeholder="Địa chỉ (VD: Cầu Giấy, Hà Nội)"
+                        autocomplete="street-address" />
+
+                    <label class="sr-only" for="serviceType">Loại dịch vụ</label>
+                    <select id="serviceType" name="serviceType">
+                        <option value="home">Vệ sinh nhà ở</option>
+                        <option value="hourly">Giúp việc theo giờ</option>
+                        <option value="regular">Vệ sinh định kỳ</option>
+                    </select>
+
+                    <label class="sr-only" for="date">Ngày</label>
+                    <input id="date" name="date" type="date" />
+
+                    <button class="btn" type="submit">Tìm thợ &amp; báo giá</button>
+                </form>
+
+                <div class="quick-list" aria-label="Lợi ích nhanh">
+                    <span>✔ Bảo hiểm trách nhiệm</span>
+                    <span>✔ Hỗ trợ 7 ngày/tuần</span>
+                    <span>✔ Thanh toán điện tử</span>
+                </div>
+            </div>
+
+            <div class="hero-illustration" aria-label="Minh hoạ không gian sạch sẽ, tươi sáng">
+                <div class="illu" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-head">
+                <h2>Dịch vụ phổ biến</h2>
+                <a class="btn ghost" href="/Home/Service">Xem tất cả dịch vụ</a>
+            </div>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="svc-icon" aria-hidden="true">🛋️</div>
+                    <h3>Vệ sinh nhà ở</h3>
+                    <p>Dọn dẹp phòng khách, bếp, phòng ngủ; lau chùi, hút bụi và khử khuẩn.</p>
+                </article>
+
+                <article class="card">
+                    <div class="svc-icon" aria-hidden="true">🏠</div>
+                    <h3>Giúp việc theo giờ</h3>
+                    <p>Phù hợp gia đình bận rộn: dọn dẹp, giặt giũ, sắp xếp theo khung giờ linh hoạt.</p>
+                </article>
+
+                <article class="card">
+                    <div class="svc-icon" aria-hidden="true">🔁</div>
+                    <h3>Vệ sinh định kỳ</h3>
+                    <p>Gói tuần/tháng linh hoạt, theo lịch của bạn để nhà luôn như mới.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h2>Báo giá nhanh</h2>
+                    <p class="section-desc">Giá tham khảo. Liên hệ để được tư vấn chính xác theo diện tích &amp; nhu
+                        cầu.</p>
+                </div>
+            </div>
+
+            <div class="pricing">
+                <div class="price-table shadow" role="region" aria-label="Bảng giá" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dịch vụ</th>
+                                <th>Đơn vị</th>
+                                <th>Giá từ</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Vệ sinh nhà ở</td>
+                                <td>giờ</td>
+                                <td>120.000đ</td>
+                                <td>Tối thiểu 3 giờ</td>
+                            </tr>
+                            <tr>
+                                <td>Giúp việc theo giờ</td>
+                                <td>giờ</td>
+                                <td>120.000đ</td>
+                                <td>Tối thiểu 3 giờ</td>
+                            </tr>
+                            <tr>
+                                <td>Vệ sinh định kỳ</td>
+                                <td>tháng</td>
+                                <td>1.200.000đ</td>
+                                <td>2 buổi/tuần</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <aside class="deal shadow" aria-label="Ưu đãi">
+                    <h3>Ưu đãi</h3>
+                    <ul>
+                        <li>Giảm 15% cho đơn hàng đầu tiên</li>
+                        <li>Tặng ưu đãi sinh nhật thành viên</li>
+                        <li>Giới thiệu bạn – nhận 50.000đ</li>
+                    </ul>
+                    <a class="btn" href="#booking">Nhận báo giá chi tiết</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage -->
+    <section class="section" id="coverage">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h2>Khu vực phục vụ</h2>
+                    <p class="section-desc">Hiện có mặt tại các thành phố lớn. Liên tục mở rộng.</p>
+                </div>
+            </div>
+
+            <div class="coverage">
+                <div class="map shadow" aria-label="Bản đồ Việt Nam, minh hoạ khu vực hoạt động">
+                    <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path
+                            d="M60 30c30 10 50 25 45 45-4 16-26 26-18 40s32 18 24 34c-8 15-35 10-38 24-3 14 24 20 20 36-6 25-48 26-51 44-3 18 40 24 47 39 7 14-14 25-12 34 2 10 26 20 30 30"
+                            stroke="var(--green-500)" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </div>
+
+                <div class="areas shadow">
+                    <h3>Thành phố</h3>
+                    <ul>
+                        <li>TP. Hồ Chí Minh</li>
+                        <li>Hà Nội</li>
+                        <li>Đà Nẵng</li>
+                        <li>Cần Thơ</li>
+                        <li>Hải Phòng</li>
+                        <li>Nha Trang</li>
+                        <li>Biên Hoà</li>
+                        <li>Vũng Tàu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" aria-labelledby="testi-title">
+        <div class="container">
+            <div class="section-head">
+                <h2 id="testi-title">Khách hàng nói gì</h2>
+                <div class="stars" aria-label="Đánh giá trung bình 4.9/5">★★★★★</div>
+            </div>
+
+            <div class="grid-3">
+                <figure class="quote shadow">
+                    <header class="quote-head">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <figcaption>
+                            <strong>Nguyễn Thu H.</strong><br><small>Quận 7, TP.HCM</small>
+                        </figcaption>
+                    </header>
+                    <p>“Đặt lịch nhanh, nhân viên cực kỳ dễ thương. Nhà sạch bong sau 2 giờ!”</p>
+                </figure>
+
+                <figure class="quote shadow">
+                    <header class="quote-head">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <figcaption>
+                            <strong>Phạm Minh T.</strong><br><small>Hai Bà Trưng, Hà Nội</small>
+                        </figcaption>
+                    </header>
+                    <p>“Giá minh bạch, thanh toán tiện qua ví điện tử. Sẽ dùng lại.”</p>
+                </figure>
+
+                <figure class="quote shadow">
+                    <header class="quote-head">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <figcaption>
+                            <strong>Trần Gia K.</strong><br><small>Thanh Khê, Đà Nẵng</small>
+                        </figcaption>
+                    </header>
+                    <p>“Dịch vụ sau xây dựng xử lý bụi mịn rất kỹ. Rất hài lòng.”</p>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="section" id="blog">
+        <div class="container">
+            <div class="section-head">
+                <h2>Bài viết &amp; Mẹo vặt</h2>
+                <a class="btn ghost" href="#">Xem tất cả</a>
+            </div>
+
+            <div class="blog">
+                <article class="post shadow">
+                    <div class="thumb" role="img" aria-label="Mẹo vệ sinh phòng khách"></div>
+                    <div class="content">
+                        <h3>Mẹo vệ sinh phòng khách hiệu quả</h3>
+                        <p>Checklist 15 phút mỗi ngày để phòng khách luôn gọn gàng.</p>
+                    </div>
+                </article>
+
+                <article class="post shadow">
+                    <div class="thumb" role="img" aria-label="Cách giặt rèm"></div>
+                    <div class="content">
+                        <h3>Cách giặt rèm đúng cách</h3>
+                        <p>Phân biệt chất liệu và quy trình giặt an toàn cho máy.</p>
+                    </div>
+                </article>
+
+                <article class="post shadow">
+                    <div class="thumb" role="img" aria-label="Khử mùi nhà bếp"></div>
+                    <div class="content">
+                        <h3>Khử mùi nhà bếp trong 5 bước</h3>
+                        <p>Sử dụng nguyên liệu tự nhiên, an toàn cho trẻ nhỏ.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="section" id="faqs">
+        <div class="container">
+            <div class="section-head">
+                <h2>Câu hỏi thường gặp</h2>
+            </div>
+
+            <details>
+                <summary>Nhân viên có mang dụng cụ và hoá chất không?</summary>
+                <p>Có. Chúng tôi mang đầy đủ dụng cụ và hoá chất đạt tiêu chuẩn an toàn cho gia đình.</p>
+            </details>
+            <details>
+                <summary>Chính sách bồi thường thế nào nếu xảy ra hư hại?</summary>
+                <p>Đã có bảo hiểm trách nhiệm. Mọi sự cố sẽ được ghi nhận và xử lý trong 3–5 ngày làm việc.</p>
+            </details>
+            <details>
+                <summary>Tôi có thể huỷ lịch miễn phí không?</summary>
+                <p>Miễn phí huỷ/đổi lịch trước 12 giờ so với thời gian đã đặt.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Contact CTA (short) -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h2>Liên hệ &amp; Tư vấn</h2>
+                    <p class="section-desc">Nhập thông tin, chúng tôi sẽ gọi lại trong 10 phút làm việc.</p>
+                </div>
+            </div>
+
+            <div class="contact">
+                <form class="shadow"
+                    onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm.'); this.reset();">
+                    <div class="field">
+                        <label for="fullname">Họ và tên</label>
+                        <input id="fullname" name="fullname" autocomplete="name" required placeholder="Nguyễn Văn A" />
+                    </div>
+                    <div class="field">
+                        <label for="phone">Số điện thoại</label>
+                        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required
+                            placeholder="09xx xxx xxx" />
+                    </div>
+                    <div class="field">
+                        <label for="city">Khu vực</label>
+                        <input id="city" name="city" autocomplete="address-level2" placeholder="VD: Quận 3, TP.HCM" />
+                    </div>
+                    <div class="field">
+                        <label for="message">Nhu cầu</label>
+                        <textarea id="message" name="message"
+                            placeholder="Mô tả sơ bộ căn hộ và thời gian mong muốn"></textarea>
+                    </div>
+                    <button class="btn" type="submit">Gửi yêu cầu</button>
+                </form>
+
+                <aside class="info shadow">
+                    <h3>Thông tin liên hệ</h3>
+                    <p><strong>Hotline:</strong> <a href="tel:0983538368">0983 538 368</a></p>
+                    <p><strong>Zalo:</strong> <a href="https://zalo.me/0983538368" target="_blank" rel="noopener">0983
+                            538 368</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:hello@happyhome.vn">hello@happyhome.vn</a></p>
+                    <p><strong>Giờ làm việc:</strong> 08:00 – 20:00 (Thứ 2 – Chủ nhật)</p>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- About (short) -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-head">
+                <h2>Về chúng tôi</h2>
+            </div>
+            <p class="section-desc">
+                HAPPY HOME là thương hiệu dịch vụ vệ sinh hướng đến gia đình Việt hiện đại. Chúng tôi kết hợp công nghệ
+                đặt lịch tiện lợi và quy trình dịch vụ chuẩn để mang đến trải nghiệm minh bạch, thân thiện và an toàn.
+            </p>
+        </div>
+    </section>
+
+</main>
