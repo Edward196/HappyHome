@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    var returnUrl = ViewBag.ReturnUrl as string;
+}
+
+<h2>Login</h2>
+
+<form method="post" asp-action="Login" asp-route-returnUrl="@returnUrl">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label>Username</label>
+        <input name="username" />
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input name="password" type="password" />
+    </div>
+
+    <button type="submit">Login</button>
+
+    @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div style="color:red">@e.ErrorMessage</div>
+    }
+</form>

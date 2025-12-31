@@ -48,7 +48,7 @@
             "name": "Launch Api",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "buildApi",
+            "preLaunchTask": "buildAPI",
             "program": "${workspaceFolder}/HappyHome.Api/bin/Debug/net8.0/HappyHome.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/HappyHome.Api",

@@ -1,8 +1,8 @@
-namespace HappyHome.API.Identity;
+namespace HappyHome.Api.Infrastructure.Identity;
 
 public class RefreshToken
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     public string UserId { get; set; } = default!;
     public string TokenHash { get; set; } = default!;

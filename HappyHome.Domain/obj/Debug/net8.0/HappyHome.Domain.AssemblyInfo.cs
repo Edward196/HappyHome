@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HappyHome.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc3dd448145950d2b976f0fc10a5707372199d67")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3e7e2ff0e711250b989e269f01b5b19147e742b")]
 [assembly: System.Reflection.AssemblyProductAttribute("HappyHome.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HappyHome.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

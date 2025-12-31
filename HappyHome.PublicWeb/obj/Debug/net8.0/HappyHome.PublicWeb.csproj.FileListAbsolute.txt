@@ -26,3 +26,4 @@ E:\Code\HappyHome\HappyHome.PublicWeb\obj\Debug\net8.0\refint\HappyHome.PublicWe
 E:\Code\HappyHome\HappyHome.PublicWeb\obj\Debug\net8.0\HappyHome.PublicWeb.pdb
 E:\Code\HappyHome\HappyHome.PublicWeb\obj\Debug\net8.0\HappyHome.PublicWeb.genruntimeconfig.cache
 E:\Code\HappyHome\HappyHome.PublicWeb\obj\Debug\net8.0\ref\HappyHome.PublicWeb.dll
+E:\Code\HappyHome\HappyHome.PublicWeb\obj\Debug\net8.0\HappyHome.PublicWeb.sourcelink.json

@@ -1,59 +1,110 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using HappyHome.ManagementWeb.Models;
-using System.Security.Claims;
+using HappyHome.ManagementWeb.Auth;
+using HappyHome.ManagementWeb.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
-namespace HappyHome.ManagementWeb.Controllers;
-
-public class AuthController : Controller
+namespace HappyHome.ManagementWeb.Controllers
 {
-    private readonly IAuthApiClient _auth;
-    private readonly IApiTokenStore _tokenStore;
-
-    public AuthController(IAuthApiClient auth, IApiTokenStore tokenStore)
+    public class AuthController : Controller
     {
-        _auth = auth;
-        _tokenStore = tokenStore;
-    }
+        private readonly IAuthApiClient _authApi;
+        private readonly IAuthSessionStore _store;
 
-    [HttpGet]
-    public IActionResult Login() => View();
-
-    [HttpPost]
-    public async Task<IActionResult> Login(string username, string password)
-    {
-        var resp = await _auth.LoginAsync(new LoginRequest(username, password));
-
-        _tokenStore.Set(new ApiTokens
+        public AuthController(IAuthApiClient authApi, IAuthSessionStore store)
         {
-            AccessToken = resp.AccessToken,
-            AccessTokenExpiresAt = DateTimeOffset.UtcNow.AddSeconds(resp.ExpiresInSeconds - 30),
-            RefreshToken = resp.RefreshToken
-        });
+            _authApi = authApi;
+            _store = store;
+        }
 
-        var claims = new List<Claim>
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login(string? returnUrl = null)
         {
-            new Claim(ClaimTypes.NameIdentifier, resp.UserId.ToString()),
-            new Claim(ClaimTypes.Name, resp.UserName),
-        };
-        foreach (var r in resp.Roles) claims.Add(new Claim(ClaimTypes.Role, r));
+            if (User?.Identity?.IsAuthenticated == true)
+                return RedirectToAction("Index", "Home");
 
-        await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies")));
-        return RedirectToAction("Index", "Dashboard");
-    }
+            // Default: về Home nếu không có returnUrl
+            if (string.IsNullOrWhiteSpace(returnUrl))
+                returnUrl = Url.Content("~/");
 
-    [HttpPost]
-    public async Task<IActionResult> Logout()
-    {
-        // optional: call API logout to revoke refresh token
-        var tokens = _tokenStore.Get();
-        if (tokens != null)
-            await _auth.LogoutAsync(new RefreshRequest(tokens.RefreshToken));
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
 
-        _tokenStore.Clear();
-        await HttpContext.SignOutAsync("Cookies");
-        return RedirectToAction("Login");
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(string username, string password, string? returnUrl = null)
+        {
+            try
+            {
+                var token = await _authApi.LoginAsync(new LoginRequestDto
+                {
+                    Username = username,
+                    Password = password
+                });
+
+                // store tokens in session
+                _store.Set(new AuthSession
+                {
+                    AccessToken = token.AccessToken,
+                    RefreshToken = token.RefreshToken,
+                    AccessTokenExpiresAtUtc = DateTime.UtcNow.AddSeconds(token.ExpiresIn)
+                });
+
+                // get profile + roles
+                var me = await _authApi.MeAsync(token.AccessToken);
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, me.UserId),
+                    new Claim(ClaimTypes.Name, me.Username)
+                };
+                foreach (var r in me.Roles)
+                    claims.Add(new Claim(ClaimTypes.Role, r));
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    principal,
+                    new AuthenticationProperties { IsPersistent = true });
+
+                if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Login failed");
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            var session = _store.Get();
+            if (session != null && !string.IsNullOrWhiteSpace(session.RefreshToken))
+            {
+                await _authApi.LogoutAsync(new RefreshRequestDto { RefreshToken = session.RefreshToken });
+            }
+
+            _store.Clear();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied() => View();
     }
 }
