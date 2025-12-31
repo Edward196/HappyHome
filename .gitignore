@@ -47,3 +47,13 @@ msbuild.wrn
 node_modules/
 package-lock.json
 package.json
+HappyHome.Api/obj/Debug/net8.0/HappyHome.Api.AssemblyInfo.cs
+HappyHome.Api/obj/Debug/net8.0/HappyHome.Api.AssemblyInfoInputs.cache
+HappyHome.Application/obj/Debug/net8.0/HappyHome.Application.AssemblyInfo.cs
+HappyHome.Application/obj/Debug/net8.0/HappyHome.Application.AssemblyInfoInputs.cache
+HappyHome.Domain/obj/Debug/net8.0/HappyHome.Domain.AssemblyInfo.cs
+HappyHome.Domain/obj/Debug/net8.0/HappyHome.Domain.AssemblyInfoInputs.cache
+HappyHome.Infrastructure/obj/Debug/net8.0/HappyHome.Infrastructure.AssemblyInfo.cs
+HappyHome.Infrastructure/obj/Debug/net8.0/HappyHome.Infrastructure.AssemblyInfoInputs.cache
+HappyHome.ManagementWeb/obj/Debug/net8.0/HappyHome.ManagementWeb.AssemblyInfo.cs
+HappyHome.ManagementWeb/obj/Debug/net8.0/HappyHome.ManagementWeb.AssemblyInfoInputs.cache
