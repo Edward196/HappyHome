@@ -159,5 +159,9 @@ namespace HappyHome.Api.Controllers
                 Roles = roles.ToList()
             });
         }
+
+        [HttpGet("ping")]
+        [AllowAnonymous]
+        public IActionResult Ping() => Ok("AUTH-CONTROLLER-OK");
     }
 }

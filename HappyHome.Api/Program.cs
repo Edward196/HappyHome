@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using HappyHome.Api.Database;
 using HappyHome.Api.Infrastructure.Contracts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,35 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Strongly-typed options
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Events = new CookieAuthenticationEvents
+    {
+        OnRedirectToLogin = ctx =>
+        {
+            // API: return 401 instead of 302 redirect
+            if (ctx.Request.Path.StartsWithSegments("/api"))
+            {
+                ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return Task.CompletedTask;
+            }
+            ctx.Response.Redirect(ctx.RedirectUri);
+            return Task.CompletedTask;
+        },
+        OnRedirectToAccessDenied = ctx =>
+        {
+            if (ctx.Request.Path.StartsWithSegments("/api"))
+            {
+                ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            }
+            ctx.Response.Redirect(ctx.RedirectUri);
+            return Task.CompletedTask;
+        }
+    };
+});
+
+// Configure JwtOptions
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 
 // ✅ DbContext (typed)
@@ -35,7 +64,11 @@ builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddSingleton<ITokenCrypto, TokenCrypto>();
 
 // ✅ Authentication / JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
     .AddJwtBearer(options =>
     {
         var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
@@ -54,7 +87,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
             ValidateLifetime = true,
 
-            // ✅ Reduce random 401 due to clock drift; tune as you like
+            // Reduce random 401 due to clock drift; tune as you like
             ClockSkew = TimeSpan.FromSeconds(30)
         };
     });
@@ -84,5 +117,17 @@ app.MapControllers();
 //         await HappyHome.Api.Infrastructure.Identity.IdentitySeed.SeedAsync(scope.ServiceProvider);
 //     }
 // }
+
+app.MapGet("/__endpoints", (IEnumerable<Microsoft.AspNetCore.Routing.EndpointDataSource> sources) =>
+{
+    var endpoints = sources.SelectMany(s => s.Endpoints)
+        .OfType<Microsoft.AspNetCore.Routing.RouteEndpoint>()
+        .Select(e => e.RoutePattern.RawText)
+        .Distinct()
+        .OrderBy(x => x)
+        .ToList();
+
+    return Results.Ok(endpoints);
+}).AllowAnonymous();
 
 app.Run();
