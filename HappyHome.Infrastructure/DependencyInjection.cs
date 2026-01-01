@@ -5,8 +5,6 @@ using HappyHome.Infrastructure.Persistence;
 using HappyHome.Infrastructure.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using HappyHome.Infrastructure.Auth;
 
 namespace HappyHome.Infrastructure;
@@ -30,14 +28,6 @@ public static class DependencyInjection
         services.AddScoped<ITokenService, TokenService>();
         services.AddSingleton<ITokenCrypto, TokenCrypto>();
 
-        return services;
-    }
-
-    public static IServiceCollection AddApplication(this IServiceCollection services)
-    {
-        services.AddScoped<IAuthService, AuthService>();
-        // JwtOptions có thể bind từ config ở API hoặc infra
-        services.AddSingleton(new JwtOptions { RefreshTokenDays = 14 });
         return services;
     }
 }

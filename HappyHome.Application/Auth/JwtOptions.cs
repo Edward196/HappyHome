@@ -8,8 +8,8 @@ public class JwtOptions
     public string Audience { get; set; } = string.Empty;
 
     // minutes
-    public int AccessTokenMinutes { get; set; } = 15;
+    public int AccessTokenMinutes { get; set; }
 
     // days
-    public int RefreshTokenDays { get; set; } = 14;
+    public int RefreshTokenDays { get; set; }
 }
