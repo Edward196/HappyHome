@@ -1136,6 +1136,56 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "HappyHome.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HappyHome.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HappyHome.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HappyHome.Application.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "HappyHome.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/HappyHome.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HappyHome.Domain.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "HappyHome.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HappyHome.Application": "1.0.0",
+          "HappyHome.Domain": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "8.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HappyHome.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HappyHome.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -3069,16 +3119,30 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "HappyHome.Application/1.0.0": {
+      "type": "project",
+      "path": "../HappyHome.Application/HappyHome.Application.csproj",
+      "msbuildProject": "../HappyHome.Application/HappyHome.Application.csproj"
+    },
+    "HappyHome.Domain/1.0.0": {
+      "type": "project",
+      "path": "../HappyHome.Domain/HappyHome.Domain.csproj",
+      "msbuildProject": "../HappyHome.Domain/HappyHome.Domain.csproj"
+    },
+    "HappyHome.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../HappyHome.Infrastructure/HappyHome.Infrastructure.csproj",
+      "msbuildProject": "../HappyHome.Infrastructure/HappyHome.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.*",
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.*",
+      "HappyHome.Application >= 1.0.0",
+      "HappyHome.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.22",
       "Microsoft.EntityFrameworkCore >= 8.*",
       "Microsoft.EntityFrameworkCore.Design >= 8.*",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.*",
       "Swashbuckle.AspNetCore >= 6.6.2",
       "System.IdentityModel.Tokens.Jwt >= 8.*"
     ]
@@ -3109,7 +3173,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Code\\HappyHome\\HappyHome.Application\\HappyHome.Application.csproj": {
+              "projectPath": "E:\\Code\\HappyHome\\HappyHome.Application\\HappyHome.Application.csproj"
+            },
+            "E:\\Code\\HappyHome\\HappyHome.Infrastructure\\HappyHome.Infrastructure.csproj": {
+              "projectPath": "E:\\Code\\HappyHome\\HappyHome.Infrastructure\\HappyHome.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3127,14 +3198,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication.JwtBearer": {
-            "target": "Package",
-            "version": "[8.*, )"
-          },
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[8.*, )"
-          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.22, )"
@@ -3146,10 +3209,6 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
-            "target": "Package",
-            "version": "[8.*, )"
-          },
-          "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[8.*, )"
           },

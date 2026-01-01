@@ -1,4 +1,4 @@
-namespace HappyHome.Api.Infrastructure.Identity;
+namespace HappyHome.Application.Auth;
 
 public class RefreshToken
 {

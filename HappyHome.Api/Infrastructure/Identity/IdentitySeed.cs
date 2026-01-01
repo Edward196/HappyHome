@@ -4,7 +4,7 @@ namespace HappyHome.Api.Infrastructure.Identity
 {
     public static class IdentitySeed
     {
-        public static async Task SeedAsync(IServiceProvider services)
+        public static async Task SeedAdminAsync(IServiceProvider services)
         {
             using var scope = services.CreateScope();
 

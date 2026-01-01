@@ -1,19 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
-namespace HappyHome.Api.Infrastructure.Contracts;
-
-public interface ITokenCrypto
-{
-    /// <summary>
-    /// Generate a cryptographically secure random token (plain text)
-    /// </summary>
-    string GenerateSecureToken();
-
-    /// <summary>
-    /// Hash token for storage (never store plain token)
-    /// </summary>
-    string HashToken(string token);
-}
+using HappyHome.Application.Auth.Abstractions;
+namespace HappyHome.Infrastructure.Security;
 
 public class TokenCrypto : ITokenCrypto
 {

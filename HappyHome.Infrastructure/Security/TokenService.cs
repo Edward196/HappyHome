@@ -1,58 +1,39 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HappyHome.Application.Auth.Abstractions;
+using HappyHome.Application.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-namespace HappyHome.Api.Infrastructure.Contracts;
 
-public class JwtOptions
-{
-    public string SecretKey { get; set; } = string.Empty;
-    public string Issuer { get; set; } = string.Empty;
-    public string Audience { get; set; } = string.Empty;
+namespace HappyHome.Infrastructure.Security;
 
-    // minutes
-    public int AccessTokenMinutes { get; set; } = 15;
-
-    // days
-    public int RefreshTokenDays { get; set; } = 14;
-}
-
-public interface IJwtTokenService
-{
-    /// <summary>
-    /// Create JWT access token
-    /// </summary>
-    /// <returns>
-    /// token, expiresInSeconds, roles
-    /// </returns>
-    Task<(string token, int expiresInSeconds, string[] roles)> CreateAccessTokenAsync(IdentityUser user);
-}
-
-public class JwtTokenService : IJwtTokenService
+public class TokenService : ITokenService
 {
     private readonly JwtOptions _jwt;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public JwtTokenService(
-            IOptions<JwtOptions> jwtOptions,
-            UserManager<IdentityUser> userManager)
+    public TokenService(IOptions<JwtOptions> jwtOptions, UserManager<IdentityUser> userManager)
     {
         _jwt = jwtOptions.Value;
         _userManager = userManager;
     }
 
-    public async Task<(string token, int expiresInSeconds, string[] roles)> CreateAccessTokenAsync(IdentityUser user)
+    public async Task<(string token, int expiresInSeconds, string[] roles)> CreateAccessTokenAsync(string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+            throw new UnauthorizedAccessException("User not found");
+
         var roles = await _userManager.GetRolesAsync(user);
 
         var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? ""),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-            };
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? ""),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+        };
 
         foreach (var r in roles)
             claims.Add(new Claim(ClaimTypes.Role, r));

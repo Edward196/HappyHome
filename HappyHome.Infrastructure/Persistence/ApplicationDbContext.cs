@@ -1,9 +1,10 @@
-using HappyHome.Api.Infrastructure.Identity;
+using HappyHome.Application.Auth;
+using HappyHome.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HappyHome.Api.Database
+namespace HappyHome.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {

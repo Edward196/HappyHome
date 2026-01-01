@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HappyHome.Api.Migrations
+namespace HappyHome.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialIdentity : Migration
