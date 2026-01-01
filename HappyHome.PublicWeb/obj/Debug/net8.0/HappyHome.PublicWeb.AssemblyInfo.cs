@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HappyHome.PublicWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc3dd448145950d2b976f0fc10a5707372199d67")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50004a91ff90f8297f1c726aaeaf545d51f2ef10")]
 [assembly: System.Reflection.AssemblyProductAttribute("HappyHome.PublicWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HappyHome.PublicWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
