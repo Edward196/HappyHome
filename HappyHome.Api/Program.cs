@@ -59,7 +59,7 @@ if (app.Environment.IsDevelopment())
     // Seed Identity data (roles + admin)
     using (var scope = app.Services.CreateScope())
     {
-        await HappyHome.Api.Infrastructure.Identity.IdentitySeed.SeedAdminAsync(scope.ServiceProvider);
+        await HappyHome.Api.Identity.IdentitySeed.SeedAsync(scope.ServiceProvider);
     }
 }
 

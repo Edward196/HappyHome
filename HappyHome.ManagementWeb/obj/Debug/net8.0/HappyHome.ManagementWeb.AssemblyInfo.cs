@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HappyHome.ManagementWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50004a91ff90f8297f1c726aaeaf545d51f2ef10")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3ca1411f01b290934c363f2bc3e5657a51ccdb7")]
 [assembly: System.Reflection.AssemblyProductAttribute("HappyHome.ManagementWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HappyHome.ManagementWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
