@@ -1,4 +1,5 @@
 using HappyHome.Application.Auth.Abstractions;
+using Microsoft.Extensions.Options;
 
 namespace HappyHome.Application.Auth;
 
@@ -15,13 +16,13 @@ public class AuthService : IAuthService
         ITokenService tokenService,
         ITokenCrypto crypto,
         IRefreshTokenRepository refreshRepo,
-        JwtOptions opt)
+        IOptions<JwtOptions> jwtOptions)
     {
         _identity = identity;
         _tokenService = tokenService;
         _crypto = crypto;
         _refreshRepo = refreshRepo;
-        _opt = opt;
+        _opt = jwtOptions.Value;
     }
 
     public async Task<TokenResponseDto> LoginAsync(LoginRequestDto dto)
