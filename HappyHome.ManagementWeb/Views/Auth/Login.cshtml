@@ -1,27 +1,46 @@
 ﻿@{
-    ViewData["Title"] = "Login";
-    var returnUrl = ViewBag.ReturnUrl as string;
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "_AuthLayout";
+
+    // Controller set ViewBag.ReturnUrl
+    var returnUrl = (string?)(ViewBag.ReturnUrl) ?? Url.Content("~/");
 }
 
-<h2>Login</h2>
-
-<form method="post" asp-action="Login" asp-route-returnUrl="@returnUrl">
-    @Html.AntiForgeryToken()
-
-    <div>
-        <label>Username</label>
-        <input name="username" />
+<div class="auth-card">
+    <div class="auth-brand">
+        <div class="auth-logo">HH</div>
+        <div>
+            <h1>Đăng nhập</h1>
+            <p class="muted">Hệ thống quản trị HappyHome</p>
+        </div>
     </div>
 
-    <div>
-        <label>Password</label>
-        <input name="password" type="password" />
-    </div>
+    @* ModelState errors (Controller add "Login failed") *@
+    <div asp-validation-summary="All" class="text-danger"></div>
 
-    <button type="submit">Login</button>
+    <form asp-controller="Auth" asp-action="Login" method="post" class="auth-form" novalidate>
+        @Html.AntiForgeryToken()
 
-    @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-    {
-        <div style="color:red">@e.ErrorMessage</div>
-    }
-</form>
+        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+        <div class="form-row">
+            <label for="username">Tên đăng nhập</label>
+            <input id="username" name="username" autocomplete="username" required />
+        </div>
+
+        <div class="form-row">
+            <label for="password">Mật khẩu</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+
+        <button type="submit" class="btn-primary w-full">Đăng nhập</button>
+
+        <div class="auth-links">
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
