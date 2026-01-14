@@ -7,9 +7,11 @@ public class JwtOptions
     public string Issuer { get; set; } = string.Empty;
     public string Audience { get; set; } = string.Empty;
 
-    // minutes
+    // Tokens
     public int AccessTokenMinutes { get; set; }
-
-    // days
     public int RefreshTokenDays { get; set; }
+
+    // Reset Password
+    public string ResetPasswordUrlTemplate { get; set; } = string.Empty;
+    public string MailFrom { get; set; } = string.Empty;
 }

@@ -41,4 +41,23 @@ namespace HappyHome.Application.Auth
         [JsonPropertyName("roles")]
         public List<string> Roles { get; set; } = new();
     }
+
+    public class ForgotPasswordRequestDto
+    {
+        [JsonPropertyName("email")]
+        public string Email { get; set; } = "";
+    }
+
+    public class ResetPasswordRequestDto
+    {
+        [JsonPropertyName("email")]
+        public string Email { get; set; } = "";
+
+        // token returned in email link (base64url)
+        [JsonPropertyName("token")]
+        public string Token { get; set; } = "";
+
+        [JsonPropertyName("new_password")]
+        public string NewPassword { get; set; } = "";
+    }
 }

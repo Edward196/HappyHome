@@ -106,5 +106,74 @@ namespace HappyHome.ManagementWeb.Controllers
 
         [HttpGet]
         public IActionResult AccessDenied() => View();
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string email, string? returnUrl = null)
+        {
+            try
+            {
+                // gọi API
+                await _authApi.ForgotPasswordAsync(new ForgotPasswordRequestDto
+                {
+                    Email = email
+                });
+
+                // luôn thông báo chung (không leak email tồn tại hay không)
+                TempData["ForgotPasswordMessage"] =
+                    "Nếu email tồn tại trong hệ thống, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu.";
+
+                return RedirectToAction(nameof(Login), new { returnUrl });
+            }
+            catch
+            {
+                // vẫn tránh leak chi tiết; chỉ nói chung chung
+                TempData["ForgotPasswordMessage"] =
+                    "Nếu email tồn tại trong hệ thống, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu.";
+
+                return RedirectToAction(nameof(Login), new { returnUrl });
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string email, string token)
+        {
+            // token lấy từ link email
+            token = (token ?? "").Replace(" ", "+");
+            ViewBag.Email = email;
+            ViewBag.Token = token;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(string email, string token, string newPassword)
+        {
+            try
+            {
+                await _authApi.ResetPasswordAsync(new ResetPasswordRequestDto
+                {
+                    Email = email,
+                    Token = token,
+                    NewPassword = newPassword
+                });
+
+                TempData["ResetPasswordMessage"] = "Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại.";
+                return RedirectToAction(nameof(Login));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                TempData["ResetPasswordError"] = "Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.";
+                return RedirectToAction(nameof(ResetPassword), new { token });
+            }
+            catch
+            {
+                TempData["ResetPasswordError"] = "Không thể đặt lại mật khẩu lúc này. Vui lòng thử lại.";
+                return RedirectToAction(nameof(ResetPassword), new { token });
+            }
+        }
     }
 }

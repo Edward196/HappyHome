@@ -156,6 +156,14 @@ h1 {
   color: #fca5a5
 }
 
+.forgot-box {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .10);
+}
+
 
 /* ===== App layout ===== */
 .app-body {

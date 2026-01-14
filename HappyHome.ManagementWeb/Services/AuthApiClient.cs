@@ -45,5 +45,21 @@ namespace HappyHome.ManagementWeb.Services
 
             return (await res.Content.ReadFromJsonAsync<MeResponseDto>(cancellationToken: ct))!;
         }
+
+        public async Task ForgotPasswordAsync(ForgotPasswordRequestDto dto)
+        {
+            var res = await _http.PostAsJsonAsync("/api/auth/forgot-password", dto);
+            res.EnsureSuccessStatusCode();
+        }
+
+        public async Task ResetPasswordAsync(ResetPasswordRequestDto dto)
+        {
+            var res = await _http.PostAsJsonAsync("/api/auth/reset-password", dto);
+
+            if (res.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                throw new UnauthorizedAccessException();
+
+            res.EnsureSuccessStatusCode(); // expect 204
+        }
     }
 }

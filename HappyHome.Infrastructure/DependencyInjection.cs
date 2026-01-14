@@ -6,6 +6,7 @@ using HappyHome.Infrastructure.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HappyHome.Infrastructure.Auth;
+using HappyHome.Infrastructure.Email;
 
 namespace HappyHome.Infrastructure;
 
@@ -26,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IIdentityService, IdentityService>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IEmailSender, SmtpEmailSender>();
         services.AddSingleton<ITokenCrypto, TokenCrypto>();
 
         return services;

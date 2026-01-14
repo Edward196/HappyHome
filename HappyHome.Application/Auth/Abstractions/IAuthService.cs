@@ -8,5 +8,8 @@ namespace HappyHome.Application.Auth.Abstractions
         Task<TokenResponseDto> RefreshAsync(RefreshRequestDto dto);
         Task LogoutAsync(RefreshRequestDto dto);
         Task<MeResponseDto> MeAsync(string userId);
+
+        Task ForgotPasswordAsync(ForgotPasswordRequestDto dto);
+        Task ResetPasswordAsync(ResetPasswordRequestDto dto);
     }
 }
