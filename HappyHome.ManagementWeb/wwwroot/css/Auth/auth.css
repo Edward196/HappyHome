@@ -1,0 +1,291 @@
+/* =========================================================
+   HappyHome.ManagementWeb - Auth stylesheet (ONLY AUTH)
+   ========================================================= */
+
+/* ---------- 1) Theme tokens (Dark default) ---------- */
+:root {
+  --a-bg: #0b1220;
+  --a-text: #e5e7eb;
+  --a-muted: rgba(229, 231, 235, .72);
+
+  --a-surface: rgba(255, 255, 255, .06);
+  --a-surface-2: rgba(255, 255, 255, .09);
+  --a-border: rgba(255, 255, 255, .14);
+
+  --a-primary: rgba(59, 130, 246, .95);
+
+  --a-success-bg: rgba(16, 185, 129, .14);
+  --a-success-border: rgba(16, 185, 129, .25);
+  --a-error-bg: rgba(239, 68, 68, .14);
+  --a-error-border: rgba(239, 68, 68, .25);
+
+  --a-radius-lg: 18px;
+  --a-radius-md: 12px;
+
+  --a-shadow: 0 18px 60px rgba(0, 0, 0, .45);
+
+  --a-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Light theme override: set <html data-theme="light"> */
+html[data-theme="light"] {
+  --a-bg: #f7f8fb;
+  --a-text: #0f172a;
+  --a-muted: rgba(15, 23, 42, .65);
+
+  --a-surface: rgba(15, 23, 42, .04);
+  --a-surface-2: rgba(15, 23, 42, .06);
+  --a-border: rgba(15, 23, 42, .14);
+
+  --a-shadow: 0 18px 60px rgba(2, 6, 23, .12);
+}
+
+/* ---------- 2) Responsive polish (1920 / 1440 / 1024) ---------- */
+@media (min-width: 1440px) {
+  .auth-stack {
+    width: 520px;
+  }
+
+  .auth-card {
+    width: 460px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .auth-stack {
+    width: 560px;
+  }
+
+  .auth-card {
+    width: 500px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .auth-shell {
+    padding: 40px 18px;
+  }
+
+  .auth-stack {
+    width: min(460px, 100%);
+  }
+}
+
+/* ---------- 3) Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--a-font);
+  color: var(--a-text);
+}
+
+/* ---------- 4) Auth layout ---------- */
+.auth-body {
+  min-height: 100vh;
+  background:
+    radial-gradient(900px circle at 12% 12%, rgba(59, 130, 246, .22), transparent 40%),
+    radial-gradient(900px circle at 88% 10%, rgba(16, 185, 129, .18), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, .02), transparent 35%),
+    var(--a-bg);
+}
+
+/* Center */
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+}
+
+/* Wrapper trung tâm: mọi thứ xếp theo cột */
+.auth-stack {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-card {
+  width: min(440px, 100%);
+  background: linear-gradient(180deg, var(--a-surface-2), var(--a-surface));
+  border: 1px solid var(--a-border);
+  border-radius: var(--a-radius-lg);
+  padding: 22px;
+  margin: auto;
+  box-shadow: var(--a-shadow);
+  backdrop-filter: blur(10px);
+}
+
+/* ---------- 5) Brand ---------- */
+.auth-brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.auth-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  letter-spacing: .5px;
+  background: var(--a-surface-2);
+  border: 1px solid color-mix(in srgb, var(--a-border) 85%, transparent);
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  letter-spacing: .2px;
+}
+
+.muted {
+  margin: 2px 0 0;
+  color: var(--a-muted);
+  font-size: 14px;
+}
+
+/* ---------- 6) Form ---------- */
+.auth-form {
+  margin-top: 14px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.form-row label {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--a-text) 88%, transparent);
+}
+
+.form-row input {
+  height: 44px;
+  border-radius: var(--a-radius-md);
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(6, 10, 18, .55);
+  color: var(--a-text);
+  padding: 0 12px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+html[data-theme="light"] .form-row input {
+  background: rgba(255, 255, 255, .75);
+  border-color: rgba(15, 23, 42, .16);
+  color: var(--a-text);
+}
+
+.form-row input:focus {
+  border-color: rgba(59, 130, 246, .75);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--a-primary) 22%, transparent);
+}
+
+/* ---------- 7) Buttons ---------- */
+.w-full {
+  width: 100%;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  height: 44px;
+  border-radius: var(--a-radius-md);
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--a-font);
+}
+
+.btn-primary {
+  border: none;
+  background: var(--a-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn-secondary {
+  border: 1px solid color-mix(in srgb, var(--a-border) 85%, transparent);
+  background: var(--a-surface);
+  color: var(--a-text);
+}
+
+.btn-secondary:hover {
+  background: var(--a-surface-2);
+}
+
+.btn-danger {
+  border: none;
+  background: rgba(239, 68, 68, .90);
+  color: #fff;
+}
+
+/* ---------- 8) Links / forgot ---------- */
+.auth-links {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--a-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-links a {
+  color: color-mix(in srgb, var(--a-text) 92%, transparent);
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.forgot-box {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--a-radius-md);
+  background: var(--a-surface);
+  border: 1px solid color-mix(in srgb, var(--a-border) 70%, transparent);
+}
+
+/* ---------- 9) Alerts ---------- */
+.alert {
+  border-radius: var(--a-radius-md);
+  padding: 10px 12px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background: var(--a-success-bg);
+  border: 1px solid var(--a-success-border);
+}
+
+.alert-error {
+  background: var(--a-error-bg);
+  border: 1px solid var(--a-error-border);
+}
+
+.alert-title {
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.text-danger {
+  color: #fca5a5;
+}
