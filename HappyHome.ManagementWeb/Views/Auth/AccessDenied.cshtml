@@ -1,28 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Login";
-    var returnUrl = ViewBag.ReturnUrl as string;
+    ViewData["Title"] = "Access denied";
+    Layout = "_AuthLayout";
 }
 
-<h2>Login</h2>
-
-<form method="post" asp-action="Login">
-    @Html.AntiForgeryToken()
-    <input type="hidden" name="returnUrl" value="@returnUrl" />
-
-    <div>
-        <label>Username</label>
-        <input name="username" />
+<div class="auth-card">
+    <div class="auth-brand">
+        <div class="auth-logo">!</div>
+        <div>
+            <h1>Không có quyền truy cập</h1>
+            <p class="muted">Tài khoản của bạn không được phép mở trang này.</p>
+        </div>
     </div>
 
-    <div>
-        <label>Password</label>
-        <input name="password" type="password" />
+    <div class="auth-actions">
+        <a class="btn-secondary w-full" asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        <form asp-controller="Auth" asp-action="Logout" method="post" class="w-full">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn-danger w-full">Đăng xuất</button>
+        </form>
     </div>
-
-    <button type="submit">Login</button>
-
-    @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-    {
-        <div style="color:red">@e.ErrorMessage</div>
-    }
-</form>
+</div>

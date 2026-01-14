@@ -6,5 +6,7 @@ namespace HappyHome.ManagementWeb.Services
         Task<TokenResponseDto> RefreshAsync(RefreshRequestDto dto, CancellationToken ct = default);
         Task LogoutAsync(RefreshRequestDto dto, CancellationToken ct = default);
         Task<MeResponseDto> MeAsync(string accessToken, CancellationToken ct = default);
+        Task ForgotPasswordAsync(ForgotPasswordRequestDto dto);
+        Task ResetPasswordAsync(ResetPasswordRequestDto dto);
     }
 }

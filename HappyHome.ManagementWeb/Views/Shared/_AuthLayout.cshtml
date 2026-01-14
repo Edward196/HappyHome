@@ -1,0 +1,21 @@
+﻿<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>@ViewData["Title"] - HappyHome</title>
+
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="~/css/Auth/auth.css" asp-append-version="true" />
+</head>
+
+<body class="auth-body">
+    <main class="auth-shell">
+        @RenderBody()
+    </main>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

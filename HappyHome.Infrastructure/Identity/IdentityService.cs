@@ -31,4 +31,26 @@ public class IdentityService : IIdentityService
         var roles = await _userManager.GetRolesAsync(user);
         return (user.UserName ?? "", roles.ToArray());
     }
+
+    public async Task<(bool exists, string userId)> FindUserByEmailAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        return user == null ? (false, "") : (true, user.Id);
+    }
+
+    public async Task<string?> GeneratePasswordResetTokenAsync(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null) return null;
+        return await _userManager.GeneratePasswordResetTokenAsync(user);
+    }
+
+    public async Task<bool> ResetPasswordAsync(string userId, string token, string newPassword)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null) return false;
+
+        var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+        return result.Succeeded;
+    }
 }

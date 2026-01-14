@@ -1,27 +1,83 @@
 ﻿@{
-    ViewData["Title"] = "Login";
-    var returnUrl = ViewBag.ReturnUrl as string;
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "_AuthLayout";
+
+    // Controller set ViewBag.ReturnUrl
+    var returnUrl = (string?)(ViewBag.ReturnUrl) ?? Url.Content("~/");
 }
 
-<h2>Login</h2>
-
-<form method="post" asp-action="Login" asp-route-returnUrl="@returnUrl">
-    @Html.AntiForgeryToken()
-
-    <div>
-        <label>Username</label>
-        <input name="username" />
-    </div>
-
-    <div>
-        <label>Password</label>
-        <input name="password" type="password" />
-    </div>
-
-    <button type="submit">Login</button>
-
-    @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+<div class="auth-stack">
+    @if (TempData["ResetPasswordMessage"] is not null)
     {
-        <div style="color:red">@e.ErrorMessage</div>
+        <div class="alert alert-success">
+            <div class="alert-title">✅ Đổi mật khẩu thành công</div>
+            <div class="alert-text">
+                Bạn có thể đăng nhập ngay bằng mật khẩu mới.
+            </div>
+        </div>
     }
-</form>
+
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="auth-logo">HH</div>
+            <div>
+                <h1>Đăng nhập</h1>
+                <p class="muted">Hệ thống quản trị HappyHome</p>
+            </div>
+        </div>
+
+        @* ModelState errors (Controller add "Login failed") *@
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <form asp-controller="Auth" asp-action="Login" method="post" class="auth-form" novalidate>
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+            <div class="form-row">
+                <label for="username">Tên đăng nhập</label>
+                <input id="username" name="username" autocomplete="username" required />
+            </div>
+
+            <div class="form-row">
+                <label for="password">Mật khẩu</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required />
+            </div>
+
+            <button type="submit" class="btn-primary w-full">Đăng nhập</button>
+
+            <div class="auth-links">
+                <a href="javascript:void(0)" id="toggleForgot">Quên mật khẩu?</a>
+            </div>
+        </form>
+    </div>
+
+    @if (TempData["ForgotPasswordMessage"] is not null)
+    {
+        <div class="alert alert-success" style="margin-top:10px;">
+            @TempData["ForgotPasswordMessage"]
+        </div>
+    }
+    @* ===== Forgot password modal ===== *@
+    <div id="forgotBox" class="forgot-box" style="display:none;">
+        <p class="muted" style="margin:0 0 10px;">
+            Nhập email của bạn. Nếu email tồn tại trong hệ thống, bạn sẽ nhận hướng dẫn đặt lại mật khẩu.
+        </p>
+
+        <form asp-controller="Auth" asp-action="ForgotPassword" method="post" class="auth-form" novalidate>
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+            <div class="form-row">
+                <label for="fpEmail">Email</label>
+                <input id="fpEmail" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <button type="submit" class="btn-secondary w-full">Gửi yêu cầu</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Auth/Login.js" asp-append-version="true"></script>
+}

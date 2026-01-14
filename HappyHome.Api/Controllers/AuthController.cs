@@ -49,5 +49,28 @@ namespace HappyHome.Api.Controllers
                 return Unauthorized();
             }
         }
+
+        [HttpPost("forgot-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequestDto dto)
+        {
+            await _auth.ForgotPasswordAsync(dto);
+            return Ok(); // always OK to avoid user enumeration
+        }
+
+        [HttpPost("reset-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestDto dto)
+        {
+            try
+            {
+                await _auth.ResetPasswordAsync(dto);
+                return NoContent();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized();
+            }
+        }
     }
 }

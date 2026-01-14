@@ -1,22 +1,297 @@
-html {
-  font-size: 14px;
+/* =========================================================
+   HappyHome.ManagementWeb - App stylesheet (NO AUTH)
+   ========================================================= */
+
+/* ---------- 1) Theme tokens (Dark default) ---------- */
+:root {
+  /* colors */
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --muted: rgba(229, 231, 235, .72);
+
+  --surface: rgba(255, 255, 255, .06);
+  --surface-2: rgba(255, 255, 255, .09);
+  --border: rgba(255, 255, 255, .12);
+
+  --primary: rgba(59, 130, 246, .95);
+  --danger: rgba(239, 68, 68, .90);
+
+  /* sizing */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, .25);
+
+  /* layout */
+  --container: 1120px;
+
+  /* typography */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+/* Light theme override: set <html data-theme="light"> */
+html[data-theme="light"] {
+  --bg: #f7f8fb;
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, .65);
+
+  --surface: rgba(15, 23, 42, .04);
+  --surface-2: rgba(15, 23, 42, .06);
+  --border: rgba(15, 23, 42, .12);
+
+  --shadow: 0 10px 30px rgba(2, 6, 23, .10);
+}
+
+/* ---------- 2) Responsive container (1920 / 1440 / 1024) ---------- */
+@media (min-width: 1440px) {
+  :root {
+    --container: 1240px;
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+@media (min-width: 1920px) {
+  :root {
+    --container: 1360px;
+  }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+@media (max-width: 1024px) {
+  :root {
+    --container: 960px;
+  }
+}
+
+/* ---------- 3) Base / reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.mt {
+  margin-top: 12px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* ---------- 4) Layout ---------- */
+.app-body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-container {
+  width: min(var(--container), 100%);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.header-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-main {
+  padding: 22px 0 34px;
+}
+
+.app-footer {
+  padding: 18px 0 26px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  color: var(--muted);
+}
+
+/* ---------- 5) Header components ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.brand-text {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav-link {
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inline-form {
+  display: inline;
+  margin: 0;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.dot-online {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, .95);
+}
+
+.user-name {
+  font-size: 14px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- 6) Buttons ---------- */
+.btn {
+  height: 40px;
+  border-radius: var(--radius-md);
+  padding: 0 14px;
+  border: 1px solid transparent;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: var(--surface-2);
+  text-decoration: none;
+}
+
+/* ---------- 7) Cards / page ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+/* Keep your existing .grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    display: none;
+  }
 }

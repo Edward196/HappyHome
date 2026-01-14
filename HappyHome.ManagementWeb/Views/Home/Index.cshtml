@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page">
+    <div class="page-head">
+        <div>
+            <h1>Dashboard</h1>
+            <p class="muted">Tổng quan hoạt động hệ thống quản trị.</p>
+        </div>
+
+        @if (User?.Identity?.IsAuthenticated != true)
+        {
+            <a class="btn btn-primary" asp-controller="Auth" asp-action="Login"
+                asp-route-returnUrl="@(Context.Request.Path + Context.Request.QueryString)">
+                Đăng nhập để quản trị
+            </a>
+        }
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Đơn hàng hôm nay</h3>
+            <p class="big">—</p>
+            <p class="muted">Chưa có dữ liệu (sẽ nối API sau).</p>
+        </div>
+
+        <div class="card">
+            <h3>Khách hàng</h3>
+            <p class="big">—</p>
+            <p class="muted">Tổng số khách hàng (placeholder).</p>
+        </div>
+
+        <div class="card">
+            <h3>Nhân viên</h3>
+            <p class="big">—</p>
+            <p class="muted">Số nhân sự đang hoạt động.</p>
+        </div>
+    </div>
+
+    <div class="card mt">
+        <h3>Thông báo</h3>
+        <ul class="list">
+            <li>Thiết lập menu + layout hoàn chỉnh.</li>
+            <li>Đã gắn login/logout theo cookie auth.</li>
+            <li>Bước tiếp: build trang Orders/Customers/Staff.</li>
+        </ul>
+    </div>
 </div>
